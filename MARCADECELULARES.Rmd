@@ -29,31 +29,58 @@ Marca_ord <- sort(Marca_celular); (Marca_ord)
 ```
 
 ```{r}
-freq <- table(Marca_celular)
-porc <- round(prop.table(freq)*100, 1)
-mi_min <- names(freq)[which.min(freq)] 
-(mi_min)
-mi_max <- names(freq)[which.max(freq)] 
-(mi_max)
+Marca_celular_factor <- as.factor(Marca_celular)
+
+frecuencia <- table(Marca_celular_factor)
+
 ```
 
 ```{r}
-barplot(Frecuencia_ordenada,
+suma_total <- sum(frecuencia)
+print(paste("Suma total de datos:", suma_total))
+
+frecuencia_ordenada <- sort(frecuencia, decreasing = TRUE)
+print("Frecuencia de datos ordenada:")
+print(frecuencia_ordenada)
+
+
+```{r} 
+proporciones <- prop.table(frecuencia)
+print("Proporciones:")
+print(proporciones)
+
+porcentajes <- round(proporciones * 100, 2)
+print("Porcentajes:")
+print(porcentajes)
+```
+
+```{r}
+frecuencia_minima <- min(frecuencia)
+frecuencia_maxima <- max(frecuencia)
+
+print(paste("Frecuencia mínima:", frecuencia_minima))
+print(paste("Frecuencia máxima:", frecuencia_maxima))
+```
+
+```{r}
+barplot(frecuencia_ordenada,
         main = "Frecuencia de Marcas de Celulares",
         xlab = "Marca de Celular",
         ylab = "Frecuencia",
-        col = rainbow(length(Frecuencia_ordenada)),
-        las = 2) 
+        col = rainbow(length(frecuencia_ordenada)),
+        las = 2) # 'las=2' rota las etiquetas del eje x para mejor visibilidad
 ```
 
 ```{r}
-pie(freq,
-    labels = paste(names(freq), porc, "%"),
-    col = rainbow(length(freq), 0.8),
-    main = "Marcas de Celulares")
+pie(frecuencia,
+    labels = paste(names(frecuencia), " (", porcentajes, "%)", sep = ""),
+    main = "Proporción de Marcas de Celulares",
+    col = rainbow(length(frecuencia)))
 
 ```
 
 ```{r}
+```
 
+```{r}
 ```
