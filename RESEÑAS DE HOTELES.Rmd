@@ -1,0 +1,71 @@
+---
+title: "Reseña de Hoteles"
+author: "Aguirre Alvarado Danna Paola"
+output: html_document
+date: "2025-09-14"
+---
+
+```{r}
+Reseña_Hoteles <- factor(c( "4 estrellas", "5 estrellas", "1.5 estrellas", "4.5 estrellas", "5 estrellas",
+ "4.5 estrellas", "2.5 estrellas", "4 estrellas", "4.5 estrellas", "1.5 estrellas", "3.5 estrellas", "1 estrella",
+ "3.5 estrellas", "3 estrellas", "5 estrellas", "1.5 estrellas", "2 estrellas", "2 estrellas",
+ "1.5 estrellas", "4.5 estrellas", "4.5 estrellas", "1.5 estrellas", "3.5 estrellas", "4 estrellas", "1 estrella",
+ "4 estrellas", "4.5 estrellas", "3.5 estrellas", "1 estrella", "4 estrellas", "4 estrellas", 
+ "2 estrellas", "1 estrella", "4.5 estrellas", "1 estrella"))
+
+ levels=c("1 estrella","1.5 estrellas","2 estrellas","2.5 estrellas","3 estrellas","3.5 estrellas","4 estrellas", "4.5 estrellas","5 estrellas")
+ 
+```
+
+```{r}
+suma_total_datos <- length(Reseña_Hoteles)
+print(paste("Suma total de datos:", suma_total_datos))
+
+```
+
+```{r}
+frecuencia <- table(Reseña_Hoteles)
+print("Frecuencia:")
+print(frecuencia)
+```
+
+```{r}
+frecuencia_ordenada <- sort(frecuencia)
+print("Frecuencia ordenada:")
+print(frecuencia_ordenada)
+
+```
+
+```{r}
+proporciones <- prop.table(frecuencia)
+print("Proporciones:")
+print(proporciones)
+```
+
+```{r}
+maximo <- max(frecuencia)
+minimo <- min(frecuencia)
+print(paste("Frecuencia máxima:", maximo))
+print(paste("Frecuencia mínima:", minimo))
+```
+
+```{r}
+frecuencia_ordenada_plot <- sort(frecuencia, decreasing = TRUE)
+
+barplot(frecuencia_ordenada_plot,
+        main = "Frecuencia de Reseñas de Hoteles",
+        xlab = "Número de Estrellas",
+        ylab = "Frecuencia",
+        col = "skyblue")  # las = rota las etiquetas para que sean legibles
+```
+
+```{r}
+porcentajes <- round(proporciones * 100, 1)
+
+pie(frecuencia,
+    labels = paste(names(frecuencia), " (", porcentajes, "%)", sep = ""),
+    main = "Proporción de Reseñas de Hoteles",
+    col = rainbow(length(frecuencia)))
+
+```
+

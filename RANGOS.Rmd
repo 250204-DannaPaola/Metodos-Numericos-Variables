@@ -1,0 +1,81 @@
+---
+title: "Rangos"
+author: "Aguirre Alvarado Danna Paola"
+output: html_document
+date: "2025-09-19"
+---
+
+```{r}
+Rangos <- factor(c("Principiante", "Principiante", "Aprendiz", "Intermedio", "Experto", "Intermedio", "Experto",
+"Aprendiz", "Principiante", "Avanzado", "Intermedio", "Experto", "Experto", "Experto",
+"Avanzado", "Intermedio", "Intermedio", "Principiante", "Principiante", "Principiante", "Principiante",
+"Principiante", "Intermedio", "Aprendiz", "Aprendiz", "Aprendiz", "Aprendiz", "Intermedio", 
+"Aprendiz", "Principiante", "Intermedio", "Avanzado", "Avanzado", "Intermedio", "Avanzado",
+"Principiante", "Intermedio", "Avanzado", "Intermedio", "Avanzado"))
+               
+
+ levels=c("Aprendiz","Principiante","Intermedio","Avanzado","Experto", ordered=TRUE)
+```
+
+```{r}
+Rangos_num <- as.numeric(Rangos)
+```
+
+```{r}
+median(Rangos_num)                      
+levels(Rangos)[median(Rangos_num)]
+```
+
+```{r}
+frecuencia <- table(Rangos_num)
+print("Frecuencia absoluta:")
+print(frecuencia)
+```
+
+```{r}
+proporciones <- prop.table(frecuencia)
+print("Proporciones:")
+print(proporciones)
+```
+
+```{r}
+quantile(Rangos_num, probs=c(0.25,0.5,0.75))          # cuartiles en números
+levels(Rangos)[quantile(Rangos_num, probs=c(0.25,0.5,0.75))]  # cuartiles como categorías
+table(Rangos)
+
+freq_Rangos <- table(Rangos)
+porc_Rangos <- round(prop.table(freq_Rangos)*100, 1)
+```
+
+```{r}
+frecuencia_maxima <- max(frecuencia)
+frecuencia_minima <- min(frecuencia)
+print(paste("Frecuencia máxima:", frecuencia_maxima))
+print(paste("Frecuencia mínima:", frecuencia_minima))
+
+```
+
+```{r}
+barplot(frecuencia,
+        main = "Frecuencia de Rangos",
+        xlab = "Rango",
+        ylab = "Frecuencia",
+        col = c("#5DADE2", "#F4D03F", "#F1C40F", "#2ECC71", "#E74C3C"),
+        names.arg = names(frecuencia))
+```
+
+```{r}
+porcentajes <- round(proporciones * 100, 1)
+```
+
+```{r}
+pie(frecuencia,
+    labels = paste(names(frecuencia), " (", porcentajes, "%)", sep = ""),
+    main = "Proporción de Rangos",
+    col = c("#5DADE2", "#F4D03F", "#F1C40F", "#2ECC71", "#E74C3C"))
+```
+
+```{r}
+
+```
+

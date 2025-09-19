@@ -2,78 +2,98 @@
 title: "Estado Civil"
 author: "Aguirre Alvarado Danna Paola"
 output: html_document
-date: "2025-09-18"
+date: "2025-09-14"
 ---
 
-```{r}
-Estado_Civil <- c("Viudo", "Viudo", "Union libre", "Soltero", "Viudo", "Union libre", "Divorciado",
- "Casado", "Union libre", "Viudo", "Viudo", "Soltero", "Divorciado", "Divorciado", "Divorciado",
- "Union libre", "Casado", "Union libre", "Casado", "Soltero", "Viudo", "Casado", "Casado", "Divorciado",
- "Union libre", "Soltero", "Divorciado", "Divorciado", "Casado", "Union libre", "Soltero",
- "Viudo", "Viudo", "Soltero", "Divorciado", "Viudo", "Viudo", "Soltero", "Union libre", "Divorciado")
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
-suma_total_datos <- length(Estado_Civil)
-print(paste("Suma total de datos:", suma_total_datos))
+nivel_educativo_ordenado <- factor(c("posdoctorado","preparatoria","preparatoria","doctorado","primaria",
+                  "doctorado","preparatoria","secundaria","preparatoria","preparatoria",
+                  "primaria","doctorado","secundaria","secundaria","secundaria",
+                  "licenciatura","doctorado","primaria","maestria","posdoctorado",
+                  "maestria","preparatoria","posdoctorado","doctorado","preparatoria",
+                  "doctorado","maestria","primaria","licenciatura","secundaria",
+                  "maestria","posdoctorado","doctorado","licenciatura","doctorado",
+                  "posdoctorado","maestria","primaria","secundaria","preparatoria"),
+                levels=c("primaria","secundaria","preparatoria","licenciatura",
+                         "maestria","doctorado","posdoctorado"),
+                ordered=TRUE)
+(nivel_educativo_ordenado)
+               
 ```
 
 ```{r}
-frecuencia <- table(Estado_Civil)
-print("Tabla de frecuencia:")
+nivel_educativo_ordenado <- factor (c(nivel_educativo_ordenado, nivel = nivel_educativo_ordenado, ordered = TRUE))
+(nivel_educativo_ordenado)
+```
+
+```{r}
+total_datos <- length(nivel_educativo_ordenado)
+print(paste("Suma total de datos:", total_datos))
+```
+
+```{r}
+frecuencia <- table(nivel_educativo_ordenado)
+print("Frecuencia y orden de los datos:")
 print(frecuencia)
-```
 
-```{r}
-frecuencia_ordenada <- sort(frecuencia, decreasing = TRUE)
-print("Tabla de frecuencia ordenada:")
-print(frecuencia_ordenada)
 ```
 
 ```{r}
 proporciones <- prop.table(frecuencia)
-print("Proporciones:")
-print(proporciones)
-
 porcentajes <- round(proporciones * 100, 2)
-print("Porcentajes:")
-print(porcentajes)
+
+tabla_resumen <- data.frame(
+  Frecuencia = as.numeric(frecuencia),
+  Proporciones = as.numeric(proporciones),
+  Porcentajes = as.numeric(porcentajes)
+)
+rownames(tabla_resumen) <- names(frecuencia)
+print("Tabla de Frecuencia, Proporciones y Porcentajes:")
+print(tabla_resumen)
 ```
 
 ```{r}
-max_frecuencia <- max(frecuencia)
-min_frecuencia <- min(frecuencia)
-
-cat_max_frec <- names(frecuencia[frecuencia == max_frecuencia])
-cat_min_frec <- names(frecuencia[frecuencia == min_frecuencia])
-
-print(paste("Categoría con la frecuencia máxima:", cat_max_frec, " (", max_frecuencia, ")"))
-print(paste("Categoría con la frecuencia mínima:", cat_min_frec, " (", min_frecuencia, ")"))
+frecuencia_minima <- min(frecuencia)
+frecuencia_maxima <- max(frecuencia)
+print(paste("Frecuencia mínima:", frecuencia_minima))
+print(paste("Frecuencia máxima:", frecuencia_maxima))
 ```
 
 ```{r}
-barplot(frecuencia_ordenada,
-        main = "Frecuencia de Estado Civil",
-        xlab = "Estado Civil",
+datos_numericos <- as.numeric(nivel_educativo_ordenado)
+```
+
+```{r}
+resumen_datos <- summary(datos_numericos)
+print("Resumen estadístico de los datos (cuartiles, mediana, etc.):")
+print(resumen_datos)
+```
+
+```{r}
+barplot(frecuencia,
+        main = "Frecuencia de Nivel Educativo",
+        xlab = "Nivel Educativo",
         ylab = "Frecuencia",
-        col = c("lightblue", "lightgreen", "coral", "gold", "pink"),
-        border = "black")
+        col = rainbow(length(frecuencia)),
+        las = 2) # las = 2 rota las etiquetas para que sean legibles
 ```
+
+
+
 
 ```{r}
 pie(frecuencia,
     labels = paste(names(frecuencia), " (", porcentajes, "%)", sep = ""),
-    main = "Proporción de Estado Civil",
-    col = c("lightblue", "lightgreen", "coral", "gold", "pink"))
-
+    main = "Proporción de Nivel Educativo",
+    col = rainbow(length(frecuencia)))
 ```
 
-```{r}
-```
 
 ```{r}
 ```
 
-```{r}
-```
 
