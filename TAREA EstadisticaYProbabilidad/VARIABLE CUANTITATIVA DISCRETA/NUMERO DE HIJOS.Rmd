@@ -1,0 +1,117 @@
+---
+title: "Numero de hijos en una familia"
+author: "Aguirre Alvarado Danna Paola"
+output: html_document
+date: "2025-09-19"
+---
+
+```{r}
+Numero_de_hijos <- c("2", "2", "4", "4", "1", "3", "1", "3", "3", "3", "5", "2", "1", "5", "3", "3", "3", "3", "1", "3", "3", "2", "5", "5", "2", "5", "2", "3", "1", "3")
+```
+
+```{r}
+summary(Numero_de_hijos)
+```
+
+```{r}
+hijos_ord <- sort(Numero_de_hijos)
+print(hijos_ord)
+```
+
+```{r}
+cuartil <- quantile(Numero_de_hijos)
+print("Cuartiles:")
+print(cuantiles)
+Q1 <- cuantiles[2]
+Q2 <- cuantiles[3]
+Q3 <- cuantiles[4]
+```
+
+```{r}
+x_media <- mean(Numero_de_hijos)
+print(paste("Media:", x_media))
+```
+
+```{r}
+mi_min <- min(Numero_de_hijos)
+print(paste("Mínimo:", mi_min))
+mi_max <- max(Numero_de_hijos)
+print(paste("Máximo:", mi_max))
+```
+
+```{r}
+varianza <- var(Numero_de_hijos)
+print(paste("Varianza:", varianza))
+DesvEst <- sd(Numero_de_hijos)
+print(paste("Desviación estándar:", DesvEst))
+```
+
+```{r}
+plot(
+  Numero_de_hijos,
+  main = "Gráfica del Número de Hijos",
+  xlab = "Familia (índice)",
+  ylab = "Número de hijos",
+  col = "blue",
+  pch = 19,
+  cex = 0.5,
+  cex.main = 1.5,
+  cex.lab = 1.2,
+  col.main = "darkred"
+)
+```
+
+```{r}
+  legend = c(mi_min, mi_max)
+  pch = 17
+  col = c("purple", "orange")
+  pt.cex = 1.5
+  cex = 0.7
+  bty = "n"
+
+abline(h = x_media, col = "red", lwd = 1, lty = 2)
+abline(h = Q2, col = "lightgreen", lwd = 1, lty = 3)
+points(which.min(Numero_de_hijos), min(Numero_de_hijos), col = "purple", pch = 17, cex = 1.5)
+points(which.max(Numero_de_hijos), max(Numero_de_hijos), col = "orange", pch = 17, cex = 1.5)
+```
+
+```{r}
+nbreaks <- 10
+miscolores <- rainbow(length(unique(Numero_de_hijos)))
+h <- hist(Numero_de_hijos, breaks = nbreaks, col = miscolores,
+          main = 'Histograma de Hijos',
+          xlab = "Número de Hijos",
+          ylab = "Frecuencia")
+text(h$mids, h$counts, labels = h$counts, pos = 3, cex = 0.8, col = "black")
+legend(
+  "topright",
+  legend = h$counts,
+  fill = miscolores,
+  cex = 0.7,
+  bty = "n"
+)
+```
+
+```{r}
+h3 <- hist(Numero_de_hijos,
+           breaks = nbreaks,
+           col = miscolores,
+           main = 'Porcentaje de Número de Hijos',
+           xlab = "Número de Hijos",
+           ylab = "Porcentaje",
+           probability = TRUE)
+porcentajes <- h3$counts / sum(h3$counts) * 100
+text(h3$mids,
+     h3$density,
+     labels = paste0(round(porcentajes, 1), "%"),
+     pos = 3,
+     cex = 0.8,
+     col = "black")
+legend(
+  "topright",
+  legend = paste0(round(porcentajes, 1), "%"),
+  fill = miscolores,
+  cex = 0.5,
+  bty = "n"
+)
+```
