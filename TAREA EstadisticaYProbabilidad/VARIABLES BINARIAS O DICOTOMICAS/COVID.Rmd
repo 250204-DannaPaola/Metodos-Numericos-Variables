@@ -1,0 +1,59 @@
+---
+title: "COVID"
+author: "Aguirre Alvarado Danna Paola"
+output: html_document
+date: "2025-09-19"
+---
+
+
+```{r}
+Covid <- c("Negativo", "Positivo", "Negativo", "Negativo", "Negativo", "Positivo", "Positivo", "Negativo", "Negativo", "Positivo", "Negativo", "Positivo", "Positivo", "Negativo", "Negativo", "Negativo", "Negativo", "Negativo", "Negativo", "Negativo", "Positivo", "Positivo", "Negativo", "Negativo", "Positivo", "Negativo", "Positivo", "Negativo", "Negativo", "Positivo", "Positivo", "Negativo", "Positivo", "Positivo", "Negativo", "Positivo", "Negativo", "Negativo", "Negativo", "Negativo", "Positivo", "Negativo", "Positivo", "Negativo", "Negativo", "Negativo", "Negativo", "Negativo", "Negativo", "Negativo")
+
+Covid_F <- factor(Covid, levels = c("Negativo", "Positivo"))
+```
+
+
+```{r}
+frecuencia_covid <- table(Covid_F)
+print("Frecuencia de resultados de COVID:")
+print(frecuencia_covid)
+
+```
+
+
+```{r}
+proporciones_covid <- prop.table(frecuencia_covid)
+print("Proporciones de resultados de COVID:")
+print(proporciones_covid)
+```
+
+
+```{r}
+max_freq_covid <- max(frecuencia_covid)
+min_freq_covid <- min(frecuencia_covid)
+print(paste("Frecuencia máxima:", max_freq_covid))
+print(paste("Frecuencia mínima:", min_freq_covid))
+```
+
+
+```{r}
+barplot(frecuencia_covid,
+        main = "Frecuencia de Resultados de COVID",
+        xlab = "Resultado",
+        ylab = "Frecuencia",
+        col = c("lightblue", "orange"))
+```
+
+
+```{r}
+porcentajes_covid <- round(proporciones_covid * 100, 1)
+```
+
+
+```{r}
+pie(frecuencia_covid,
+    labels = paste(names(frecuencia_covid), " (", porcentajes_covid, "%)", sep=""),
+    main = "Proporción de Resultados de COVID",
+    col = c("lightblue", "orange"))
+```
+
