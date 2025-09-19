@@ -1,0 +1,83 @@
+---
+title: "Color de ojos"
+author: "Aguirre Alvarado Danna Paola"
+output: html_document
+date: "2025-09-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+Color_Ojos <- c("Gris","Azul", "Ambar", "Negro", "Avellana", "Café", "Avellana", "Azul", "Verde","Ambar", "Avellana", "Café","Café", "Azul", "Verde", "Azul", "Avellana", "Verde", "Verde", "Verde","Gris", "Negro", "Avellana", "Negro", "Gris", "Negro", "Avellana", "Azul", "Ambar", "Verde")
+(Color_Ojos)
+```
+
+```{r}
+summary(Color_Ojos)
+
+```
+
+```{r}
+Estado_ord <- sort(Color_Ojos); (Estado_ord)
+
+```
+
+```{r}
+Frecuencia <- table(Color_Ojos)
+print("Frecuencia de cada color de ojos:")
+print(Frecuencia)
+```
+
+```{r}
+proporciones <- prop.table(Frecuencia)
+print("Proporciones de cada color de ojos:")
+print(proporciones)
+```
+
+```{r}
+porcentajes <- round(proporciones * 100, 2)
+print("Porcentajes de cada color de ojos:")
+print(porcentajes)
+```
+
+```{r}
+Frecuencia_ordenada <- sort(Frecuencia, decreasing = TRUE)
+print("Frecuencia ordenada (de mayor a menor):")
+print(Frecuencia_ordenada)
+```
+
+```{r}
+Frecuencia_minima <- min(Frecuencia)
+Frecuencia_maxima <- max(Frecuencia)
+
+print(paste("Frecuencia mínima:", Frecuencia_minima))
+print(paste("Frecuencia máxima:", Frecuencia_maxima))
+```
+
+
+```{r}
+colores <- c("gold", "dodgerblue", "sienna", "darkblue", "lightgrey", "limegreen")
+
+barplot(Frecuencia,
+        main = "Frecuencia de Color de Ojos",
+        xlab = "Color de Ojos",
+        ylab = "Frecuencia",
+        col = colores)
+```
+
+
+```{r}
+pie(Frecuencia,
+    labels = paste(names(Frecuencia), " (", porcentajes, "%)", sep = ""),
+    main = "Proporción de Color de Ojos",
+    col = colores)
+```
+
+
+
+
+
+```{r}
+```
